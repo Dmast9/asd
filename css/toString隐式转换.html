@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    var obj = {
+      toString: function () {
+        return "[object MyObject]";
+      },
+      valueOf: function () {
+        return 17;
+      }
+    };
+    function toString(){
+      // let fn=function(){
+      //   return Array.from(arguments)
+      // }
+      var fn={}
+      fn.toString=function(){
+        return 222
+      }
+      return fn
+    }
+    console.log('toString');
+    console.log(toString());
+    console.log(toString);
+ 
+    
+    
+  </script>
+</body>
+
+</html>

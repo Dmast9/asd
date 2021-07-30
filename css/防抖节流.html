@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<style>
+  #box {
+    width: 100%;
+    height: 300px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: skyblue;
+  }
+</style>
+
+<body>
+  <div id="box">1</div>
+  <script>
+    // 防抖，一段时间内多次触发，只执行一次,延迟触发
+    function debounce(func, wait) {
+      let timeout;
+      return function () {
+        let context = this;
+        let args = arguments;
+        if (timeout) clearTimeout(timeout);
+        timeout = setTimeout(() => {
+          func.apply(context, args)
+        }, wait);
+      }
+    }
+    // 防抖，一段时间内多次触发，只执行一次,立即触发
+    function debounce2(func, wait) {
+      let timeout;
+      let run = true
+      return function () {
+        let context = this;
+        let args = arguments;
+        if (run) {
+          run = false
+          func.apply(context, args)
+        }
+        if (timeout) clearTimeout(timeout)
+        timeout = setTimeout(() => {
+          run = true
+        }, wait);
+      }
+    }
+    // 节流固定时间触发一次，延迟触发
+    function throttle(func, delay) {
+      let run = true
+      return function () {
+        if (!run) {
+          return  // 如果开关关闭了，那就直接不执行下边的代码
+        }
+        run = false // 持续触发的话，run一直是false，就会停在上边的判断那里
+        setTimeout(() => {
+          func.apply(this, arguments)
+          run = true // 定时器到时间之后，会把开关打开，我们的函数就会被执行
+        }, delay)
+      }
+    }
+
+    // 节流固定时间触发一次，立即触发
+    function throttle2(func, delay) {
+      let run = true
+      return function () {
+        if (run) {
+          run = false
+          func.apply(this, arguments)
+          setTimeout(() => {
+            run = true
+          }, delay);
+        }
+      }
+    }
+
+    function count() {
+      content.innerHTML = num++;
+    };
+    let num = 1;
+    let content = document.getElementById('box');
+
+    // content.onclick = debounce(count, 1000);
+    content.onclick = debounce2(count, 1000);
+    // content.onclick = throttle(count, 1000);
+    // content.onclick = throttle2(count, 1000);
+
+
+  </script>
+</body>
+
+</html>

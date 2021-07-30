@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        Function.prototype.jsCall = function (cxt) {
+            let context = cxt || window
+            let key = Symbol()
+            context[key] = this
+            let args = [...arguments].slice(1)
+            let result = context[key](...args)
+            delete context[key]
+            return result
+        }
+        Function.prototype.jsApply = function (cxt, arg) {
+            let context = cxt || window
+            // 防止声明相同的属性，用唯一标识Symbol()
+            let key = Symbol()
+            context[key] = this
+            arg = arg || []
+            let result = context[key](...arg)
+            delete context[key]
+            return result
+        }
+        // jsBind利用函数柯里化，简化重复的函数调用
+        Function.prototype.jsBind = function (ctx) {
+            if (typeof this !== 'function') {
+                throw new Error('不是一个函数')
+            }
+            _this = this
+            let context = ctx || window
+            let args1 = [...arguments].slice(1)
+            return function () {
+                // 获取第二个参数
+                const args2 = [...arguments];
+                // 将第一部分参数和第二部分参数合并到一起，进行返回
+                return _this.apply(context, args1.concat(args2));
+            }
+        }
+        var obj = {
+            name: 'Dmast'
+        }
+        function test() {
+            let name = this.name
+            console.log(name);
+            console.log(arguments);
+            console.log([...arguments]);
+        }
+        test.jsCall(obj,1,2,3)
+        test.jsApply(obj)
+        // 函数的柯里化，简化重复的函数调用
+        // test.jsBind(obj,1,2,3)(4,5)
+        let a = test.jsBind(obj, 1, 2, 3)
+        a(4)
+        a(5)
+    </script>
+</body>
+
+</html>

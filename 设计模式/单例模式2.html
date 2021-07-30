@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    .prompt {
+      position: fixed;
+      top: 10px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 18px;     
+      color: #ffffff;
+      background-color: #df8263;
+      border-radius: 3px;
+      padding: 10px 30px;
+      min-width: 100px;
+    }
+    .prompt p {
+      padding: 0;
+      margin: 0;
+    }
+    .prompt.default {
+      background-color: #df8263;
+    }
+    .prompt.warning {
+      background-color: #d9b131;
+    }
+    .prompt.success {
+      background-color: #31d952;
+    }
+    .prompt.fail {
+      background-color: #cab9b9;
+    }
+    .prompt-close {
+      position: absolute;
+      top: 50%;
+      right: 10px;
+      transform: translateY(-50%);
+      width: 20px;
+      height: 20px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <button id="login">登录</button>
+  <script>
+
+    var PromptComponent = function () {
+      this.createDom = this.singlePrompt(this.createPrompt);
+    }
+    PromptComponent.prototype.init = function (params) {
+      var style = params.style || 'default',
+          message = params.message || '提示！',
+          duration = parseInt(params.duration) || 1500;
+      var promptDom = this.createDom(style, message);
+      promptDom.style.display = 'block';
+      setTimeout(function () {
+        promptDom.style.display = 'none';
+      }, duration)
+    }
+    PromptComponent.prototype.singlePrompt = function (fn) {
+      var instance;
+      return function () {
+        return instance || (instance = fn.apply(this, arguments));
+      }
+    }
+    PromptComponent.prototype.createPrompt = function (style, message) {
+      var div = document.createElement('div');
+      var strHtml = '<p>'+ message +'</p><span class="prompt-close">×</span>'
+      div.className = 'prompt ' + style;
+      div.innerHTML = strHtml;
+      div.style.display = 'none';
+      div.addEventListener('click', function () {
+        div.style.display = 'none';
+      }, false)
+      document.body.appendChild(div);
+      return div;
+    }
+    var warning = new PromptComponent();
+    document.getElementById('login').addEventListener('click', function () {
+      new Promise((resolve, reject) => {
+        setTimeout(() => {
+          resolve({code: 200})
+        }, 1000) 
+      }).then(res => {
+        if (res.code == 200) {
+          warning.init({
+            style: 'success',
+            message: '登陆成功'
+          })
+        } else {
+          warning.init({
+            style: 'fail',
+            message: '登陆失败'
+          })
+        }
+      })
+    }, false)
+  </script>
+</body>
+</html>
