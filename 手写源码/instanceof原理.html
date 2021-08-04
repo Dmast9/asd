@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    // 思路：右边变量的原型存在于左边变量的原型链上
+    function myInstanceof(right) {
+      let leftValue = this.__proto__
+      let rightValue = right.prototype
+      while (true) {
+        if (leftValue === null) {
+          return false
+        }
+        if (leftValue === rightValue) {
+          return true
+        }
+        leftValue = leftValue.__proto__
+      }
+    }
+    Object.prototype.mineInstanceof = myInstanceof
+    var arr = []
+    var obj = {}
+    var a = arr.mineInstanceof(Array)
+    var b = arr.mineInstanceof(Object)
+    var c = obj.mineInstanceof(Array)
+    var d = obj.mineInstanceof(Object)
+    console.log(a);
+    console.log(b);
+    console.log(c);
+    console.log(d);
+    
+
+
+
+  </script>
+</body>
+
+</html>
