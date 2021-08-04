@@ -29,6 +29,11 @@
         let args = arguments;
         if (timeout) clearTimeout(timeout);
         timeout = setTimeout(() => {
+          console.log(this);
+          console.log(333333);
+          console.log(context);
+          
+          
           func.apply(context, args)
         }, wait);
       }
@@ -66,7 +71,7 @@
     }
 
     // 节流固定时间触发一次，立即触发
-    function throttle2(func, delay) {
+    function throttle2(func,delay) {
       let run = true
       return function () {
         if (run) {
@@ -85,8 +90,8 @@
     let num = 1;
     let content = document.getElementById('box');
 
-    // content.onclick = debounce(count, 1000);
-    content.onclick = debounce2(count, 1000);
+    content.onclick = debounce(count, 1000);
+    // content.onclick = debounce2(count, 1000);
     // content.onclick = throttle(count, 1000);
     // content.onclick = throttle2(count, 1000);
 
