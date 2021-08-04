@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    (function () {
+      // 目标对象，是真正被代理的对象
+      function Subject() { }
+      Subject.prototype.request = function () { };
+
+      function Proxy(realSubject) {
+        this.realSubject = realSubject;
+      }
+      Proxy.prototype.request = function () {
+        this.realSubject.request();
+      };
+    }());
+  </script>
+</body>
+
+</html>
