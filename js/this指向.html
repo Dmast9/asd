@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    #content {
+      width: 150px;
+      height: 100px;
+      background-color: aqua;
+    }
+  </style>
+</head>
+<div id="content"></div>
+
+<body>
+  <script>
+    function Router() {
+      this.init();
+    }
+    //路由刷新
+    Router.prototype.refresh = function () {
+      //获取当前url的hash值
+      console.log('this111111');
+      console.log(this);
+    }
+    Router.prototype.refresh2 = () => {
+      //获取当前url的hash值
+      console.log('this2222222');
+      console.log(this);
+    }
+    /*  function test() {
+       var obj = {
+         fn: ''
+       }
+       obj.fn = () => {
+         //获取当前url的hash值
+         console.log('this2222222');
+         console.log(this);
+       }
+       return obj.fn
+       // return () => {
+       //   //获取当前url的hash值
+       //   console.log('this2222222');
+       //   console.log(this);
+       // }
+     }
+      */
+    Router.prototype.refresh3 = function () {
+      //获取当前url的hash值
+      console.log('this333333');
+      console.log(this);
+    }
+    Router.prototype.init = function () {
+
+      this.refresh2()
+      this.refresh3()
+      window.addEventListener('click', this.refresh.bind(this))
+      // 箭头函数的this，在声明时决定，是上一级的this
+      window.addEventListener('click', this.refresh2);
+      window.addEventListener('click', () => {
+        //获取当前url的hash值
+        console.log('this2222222');
+        console.log(this);
+      });
+      window.addEventListener('click', this.refresh3);
+    }
+    var router = new Router()
+  </script>
+</body>
+
+</html>

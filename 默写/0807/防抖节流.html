@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    .box {
+      width: 150px;
+      height: 100px;
+      background-color: aqua;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="box">测试防抖节流</div>
+  <script>
+    function callback() {
+      console.log(111111);
+      console.log([...arguments]);
+    }
+    //防抖延迟执行
+    function debounce1(fn, delay) {
+      var timeout
+      var args = [...arguments].slice(2)
+      return function () {
+        if (timeout) {
+          clearTimeout(timeout)
+        }
+        timeout = setTimeout(fn.bind(this, ...args), delay)
+      }
+    }
+    // 防抖立即执行
+    function debounce2(fn, delay) {
+      var timeout, flag
+      var args = [...arguments].slice(2)
+      return function () {
+        if (!flag) {
+          fn.apply(this, args)
+          flag = true
+        }
+        if (timeout) {
+          clearTimeout(timeout)
+        }
+        timeout = setTimeout(() => {
+          flag = false
+        }, delay);
+      }
+    }
+
+    //节流延迟执行
+    function throttle1(fn,delay) {
+      var timeout, flag
+      var args = [...arguments].slice(2)
+      return function () {
+        if (!flag) {
+          flag=true
+          if(timeout){
+            clearTimeout(timeout)
+          }
+          timeout = setInterval(()=>{
+            fn.apply(this,args)
+            flag=false
+          }, delay)
+        }
+      }
+    }
+    // 节流立即执行
+    function throttle2(fn,delay) {
+      var timeout, flag
+      var args = [...arguments].slice(2)
+      return function () {
+        if (!flag) {
+          flag=true
+          fn.apply(this,args)
+          // if(timeout){
+          //   clearTimeout(timeout)
+          // }
+          timeout = setInterval(()=>{
+            flag=false
+          }, delay)
+        }
+      }
+    }
+    var box = document.querySelector('.box')
+    // box.onclick=debounce1(callback,1000,'Dmast',18)
+    // box.onclick = debounce2(callback, 1000, 'Dmast', 18)
+    // box.onclick = throttle1(callback, 1000, 'Dmast', 18)
+    box.onclick = throttle2(callback, 1000, 'Dmast', 18)
+
+
+  </script>
+</body>
+
+</html>

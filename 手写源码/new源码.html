@@ -15,7 +15,7 @@
       if (fn.prototype !== null) {
         res.__proto__ = fn.prototype;
       }
-      // let fn = [].shift.call(arguments)  
+      // let fn = [].shift.call(arguments)
       // let [fn,...args] = [...arguments]  
       // 将传入构造函数的参数，在res上下文中执行一遍
       var ret = fn.apply(res, Array.prototype.slice.call(arguments, 1));

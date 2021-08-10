@@ -90,10 +90,10 @@
     let num = 1;
     let content = document.getElementById('box');
 
-    content.onclick = debounce(count, 1000);
+    // content.onclick = debounce(count, 1000);
     // content.onclick = debounce2(count, 1000);
     // content.onclick = throttle(count, 1000);
-    // content.onclick = throttle2(count, 1000);
+    content.onclick = throttle2(count, 1000);
 
 
   </script>

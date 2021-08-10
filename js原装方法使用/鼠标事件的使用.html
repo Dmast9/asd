@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    .box{
+      width: 150px;
+      height: 100px;
+      background-color: aqua;
+    }
+  </style>
+</head>
+<body>
+  <div class="box">鼠标事件测试1</div>
+  <script>
+    var box=document.querySelector('.box')
+    
+    box.addEventListener('mouseover',function(){
+      console.log('鼠标进入');
+      
+    })
+    box.addEventListener('mouseout',function(){
+      console.log('鼠标离开');
+      
+    })
+    box.addEventListener('mousedown',function(){
+      console.log('鼠标按下');
+      
+    })
+    box.addEventListener('mouseup',function(){
+      console.log('鼠标抬起');
+      
+    })
+    // box.addEventListener('mousemove',function(){
+    //   console.log('鼠标移动');
+      
+    // })
+    
+    
+  </script>
+</body>
+</html>

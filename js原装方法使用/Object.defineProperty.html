@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    // 数据描述符：value,writable
+    // 存取描述符：getter,setter
+    // enumerable,configurable两者共有且用法相同
+    // 两者不能同时使用
+    var obj = { name: 'Dmast' }
+    function test() {
+      // writable,enumerable,configurable默认都是false
+      Object.defineProperty(obj, 'age', {
+        value: 18,
+        writable: true,
+        enumerable: true,
+        configurable: true
+      })
+      Object.defineProperty(obj, 'sex', {
+        value: 'girl',
+        writable: true,
+        enumerable: true,
+      })
+    }
+    // test()
+    function test1() {
+      // 只有当configurable为true时才能通过这种方式重新定义属性，以及删除属性
+      Object.defineProperty(obj, 'age', {
+        value: 180,
+        writable: false
+      })
+      // 因为configurable为false,所以不能通过这个修改，一下代码会报错
+      // Object.defineProperty(obj, 'sex', {
+      //   value: 'boy',
+      //   writable: true,
+      //   enumerable: true,
+      // })
+    }
+    // test1()
+    function test2() {
+      // writable为true时可以通过此方式进行修改
+      obj.age = 20
+      console.log(obj);
+    }
+    // test2()
+    function test3() {
+      // 只有当enumerable为true时,这个对象的这个属性才是可迭代的
+      var keys = Object.keys(obj)
+      console.log(keys);
+    }
+    // test3()
+    function test4() {
+      var heightValue = 180
+      Object.defineProperty(obj, 'height', {
+        // configurable:true,
+        enumerable:true,
+        get() {
+          console.log('getttttttt');
+          return heightValue
+        },
+        set(val) {
+          console.log(val);
+          heightValue = val
+        }
+      })
+      var keys=Object.keys(obj)
+      console.log(keys);
+      
+      obj.height = 200
+      console.log(obj.height);
+    }
+    // test4()
+    // Object.defineProperties可以同时定义多个属性
+    function test5(){
+      var bValue=11111111
+      Object.defineProperties(obj,{
+        a:{
+          value:123,
+          writable:true
+        },
+        b:{
+          get(){
+            console.log('bbbbbbbb');
+            
+            return bValue
+          },
+          set(val){
+            console.log(val);
+            
+            bValue=val
+          }
+        }
+      })
+      obj.b=22222
+      console.log(obj.b);
+      
+    }
+    test5()
+
+  </script>,
+</body>
+
+</html>

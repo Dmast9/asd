@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    .box {
+      width: 150px;
+      height: 100px;
+      background-color: aqua;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="box">防抖节流测试</div>
+  <script>
+    var box = document.querySelector('.box')
+    function cb() {
+      console.log(this);
+      console.log(33333333);
+      console.log([...arguments]);
+    }
+    // 防抖延迟执行
+    function debounce1(callback, wait, a, b) {
+      // arguments是一个类数组对象
+      var timeout
+      var args = [...arguments]
+      return function () {
+        if (timeout) {
+          clearTimeout(timeout)
+        }
+        timeout = setTimeout(() => {
+          callback.apply(this, args.slice(1))
+        }, wait);
+      }
+    }
+    // 防抖立即执行
+    function debounce2(callback, wait, a, b) {
+      // arguments是一个类数组对象
+      var timeout, flag = true
+      var args =[...arguments]
+      return function () {
+        if (flag) {
+          callback.apply(this, args.slice(1))
+          flag = false
+        }
+        if (timeout) {
+          clearTimeout(timeout)
+        }
+        timeout = setTimeout(() => {
+          flag = true
+        }, wait);
+      }
+    }
+    // 节流延迟执行
+    function throttle1(callback, wait, a, b) {
+      var timeout, flag
+      var args=[...arguments]
+      // return function () {
+      //   if (flag) {
+      //     return false
+      //   }
+      //   flag = true
+      //   setTimeout(() => {
+      //     flag = false
+      //     callback.apply(this, args.slice(1))
+      //   }, wait)
+      // }
+      return function (){
+        if(!flag){
+          flag=true 
+          setTimeout(() => {
+            flag=false
+            callback.apply(this,args.slice(1))
+          }, wait);
+        }
+      }
+    }
+    // 节流立即执行
+    function throttle2(callback, wait, a, b) {
+      var timeout, flag
+      var args=[...arguments]
+      // return function () {
+      //   if(flag){
+      //     return false
+      //   }
+      //   flag=true
+      //   callback.apply(this,args.slice(1))
+      //   setTimeout(()=>{
+      //     flag=false
+      //   },wait)
+      // }
+      return function(){
+        if (!flag) {
+          flag = true
+          callback.apply(this, args.slice(1))
+          setTimeout(() => {
+            flag = false
+          }, wait)
+        }
+      }
+    } 
+    // box.onclick=debounce1(cb,1000,'a','b')
+    // box.onclick=debounce2(cb,1000,'a','b')
+    // box.onclick=throttle1(cb,1000,'a','b')
+    box.onclick = throttle2(cb, 1000, 'a', 'b')
+  </script>
+</body>
+
+</html>
