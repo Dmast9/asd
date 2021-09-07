@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    function jsNew(fn){
+      var obj={}      
+      if(fn.prototype!==null){
+        obj.__proto__=fn.prototype
+      }      
+      let args=[...arguments].slice(1)
+      let result=fn.call(obj,...args)
+      if((typeof result =='object'||typeof result=='function')&&typeof result !='null'){
+        return result
+      }else{
+        return obj
+      }
+    }
+    function Person(name){
+      this.name=name
+    }
+    Person.prototype.say=function(){
+      console.log('你好啊');
+      
+    }
+    var Dmast=jsNew(Person,'Dmast')
+    console.log(Dmast);
+    
+  </script>
+</body>
+</html>

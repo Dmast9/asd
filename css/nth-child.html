@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    .box span:nth-child(1){
+      color: red;
+      font-size: 30px;
+    }
+    .box span:nth-child(2){
+      /* color: red;
+      font-size: 30px; */
+    }
+    .box span:nth-child(3){
+      color: blue;
+      font-size: 30px;
+    }
+    .el{
+      width: 100px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+  </style>
+</head>
+<div class="box">
+  <span>0000000</span>
+  <span>11111111</span>
+  <span>33333333</span>
+  <div>
+    <span>444444</span>
+  </div>
+  <div class="el">发送到发达阿斯顿发</div></div>
+  <!-- <div>
+    <span>1111</span>
+  </div>
+  <span>22222</span> -->
+</div>
+<body>
+  <script>
+    var box=document.querySelector('.box')
+
+  </script>
+</body>
+</html>

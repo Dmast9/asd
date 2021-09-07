@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    function jsCall(ctx){
+      ctx=ctx||window
+      let key=Symbol()
+      ctx[key]=this
+      let args=[...arguments].slice(1)
+      let result = ctx[key](...args)
+      delete ctx[key]
+      return result
+    }
+    Function.prototype.jsCall=jsCall
+    var obj={
+      name:'Dmast',
+      test(age){
+      
+        console.log(age);
+        
+        console.log('年龄'+age);
+      }
+    }
+    var obj2={
+      name:'asd'
+    }
+    obj.test.jsCall(obj2,181,20)
+    // obj.jsCall(obj2,18)
+  </script>
+</body>
+</html>

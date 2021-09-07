@@ -19,7 +19,7 @@
       // writable,enumerable,configurable默认都是false
       Object.defineProperty(obj, 'age', {
         value: 18,
-        writable: true,
+        writable: true, 
         enumerable: true,
         configurable: true
       })
@@ -36,7 +36,7 @@
         value: 180,
         writable: false
       })
-      // 因为configurable为false,所以不能通过这个修改，一下代码会报错
+      // 因为configurable为false,所以不能通过这个修改，以下代码会报错
       // Object.defineProperty(obj, 'sex', {
       //   value: 'boy',
       //   writable: true,

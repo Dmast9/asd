@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    let arr = [1111, 2, 3, [4, 5, 6],7,8]
+    // let arr = [[4, 5, 6],[1,2,3],3]
+    // let arr = [1,[4,5,6],2,3]
+    var obj={
+      name:'Dmast',
+      sex:1111,
+      like:{
+        age:'18',
+        aaa:1111
+      },
+      height:180
+    }
+    class Dep {
+      constructor(val) {
+        this.subs = []
+        this.num=1
+        this.val=val
+      }
+      addSub() {
+       
+        
+        this.subs.push(Dep.target)
+        console.log('this.subs');
+        console.log(this.subs);
+      }
+      notify() {
+        for (let i = 0; i < this.subs.length; i++) {
+          this.subs[i].cb()
+        }
+      }
+    }
+    Dep.target = null
+    class Observe {
+      constructor(data) {
+        let keys = Object.keys(data)
+        for (var i = 0; i < keys.length; i++) {    
+          defineReactive(data, keys[i], data[keys[i]])
+        }
+      }
+    }
+    function defineReactive(data, key, val) {
+      observe(val)
+      var  dep = new Dep(val)
+      Object.defineProperty(data, key, {
+        configurable: true,
+        enumerable: true,
+        get() {
+          console.log('gettttttt');
+          console.log(dep);
+          dep.addSub()
+          return val
+        },
+        set(newVal) {
+          if (val !== newVal) {
+            val = newVal
+            observe(newVal)
+            dep.notify()
+          }
+        }
+      })
+    }
+    function observe(data) {
+      if (typeof data == 'object') {
+        new Observe(data)
+      } else {
+        return
+      }
+    }
+    observe(arr)
+    // observe(obj)
+    class Watcher {
+      constructor(target,exp, cb) {
+        this.exp = exp
+        this.cb = cb
+        Dep.target = this
+        target[exp]
+      }
+    }
+
+    new Watcher(obj,'name',()=>{
+      console.log('我是订阅者1');
+    })
+
+
+
+
+    new Watcher(arr,'0',()=>{
+      console.log('我是订阅者1');
+    })
+    new Watcher(arr,'0',()=>{
+      console.log('我是订阅者11');
+    })
+    new Watcher(arr,'1',()=>{
+      console.log('我是订阅者2');
+    })
+    // arr[0]=1111111
+    // arr[1]=222222
+    new Watcher(arr,'0',()=>{
+      console.log('我是订阅者111111');
+    })
+    new Watcher(arr,'2',()=>{
+      console.log('我是订阅者1');
+    })
+    
+    new Watcher(arr,'0',()=>{
+      console.log('我是订阅者11111111111');
+      
+    })
+    new Watcher(arr,'1',()=>{
+      console.log('我是订阅者2');
+      
+    })
+    new Watcher(arr,'2',()=>{
+      console.log('我是订阅者3');
+      
+    })
+   
+    console.log('----------------');
+    // arr[0]
+    new Watcher(arr,'0',()=>{
+      console.log('我是订阅者11111111111');
+    })
+    arr[0]=1111111111
+
+    // arr[0]
+
+  </script>
+</body>
+
+</html>

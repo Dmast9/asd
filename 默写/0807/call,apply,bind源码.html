@@ -13,7 +13,7 @@
       var key=Symbol()
       ctx[key]=this
       var args=[...arguments].slice(1)
-      let result=ctx.asd(...args)
+      let result=ctx[key](...args)
       delete ctx[key]
       return ctx
     }

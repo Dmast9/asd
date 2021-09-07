@@ -59,6 +59,10 @@
           message = params.message || '提示！',
           duration = parseInt(params.duration) || 1500;
       var promptDom = this.createDom(style, message);
+      console.log(message);
+      
+      console.log(promptDom);
+      
       promptDom.style.display = 'block';
       setTimeout(function () {
         promptDom.style.display = 'none';
@@ -67,6 +71,8 @@
     PromptComponent.prototype.singlePrompt = function (fn) {
       var instance;
       return function () {
+        console.log(1111111111);
+        
         return instance || (instance = fn.apply(this, arguments));
       }
     }
@@ -86,7 +92,20 @@
     document.getElementById('login').addEventListener('click', function () {
       new Promise((resolve, reject) => {
         setTimeout(() => {
-          resolve({code: 200})
+          // resolve({code: 200})
+          var num=Math.floor(Math.random()*10)
+          // reject('error')
+          if(num>5){
+            console.log('20000');
+            console.log(num);
+            
+            resolve({code: 200})
+          }else{
+            console.log('40444');
+            console.log(num);
+            
+            resolve({code: 404})
+          }
         }, 1000) 
       }).then(res => {
         if (res.code == 200) {

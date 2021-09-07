@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    // var arr=[]
+    // console.log(arr instanceof Array);
+    function jsInstanceof(target){
+      let leftValue=this.__proto__
+      let rightValue=target.prototype
+      while(1){
+        if(leftValue==null){
+          return false
+        }else{
+          if(leftValue==rightValue){
+            return true
+          }else{
+            leftValue=leftValue.__proto__
+          }
+        }
+      }
+    }
+    Object.prototype.jsInstanceof=jsInstanceof
+    var arr=[],obj={}
+    var flag = arr.jsInstanceof(Array)
+    var flag2 = arr.jsInstanceof(Object)
+    var flag3 = obj.jsInstanceof(Array)
+    var flag4 = obj.jsInstanceof(Object)
+    console.log(flag);
+    console.log(flag2);
+    console.log(flag3);
+    console.log(flag4);
+    console.log(arr);
+    class Person{
+      constructor(name){
+        this.name=name
+      }
+    }
+    var Dmast=new Person('Dmast')
+    console.log(Dmast);
+    console.log(Dmast.__proto__);
+    console.log(Dmast.__proto__.__proto__==Object.prototype);
+    console.log(Dmast.__proto__.__proto__.__proto__);
+    
+    
+    
+    
+  </script>
+</body>
+</html>

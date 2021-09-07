@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    function jsApply(ctx,args){
+      ctx=ctx||window
+      let key=Symbol()
+      ctx[key]=this
+      let result= ctx[key](...args)
+      delete ctx[key]
+      return result
+    }
+    Function.prototype.jsApply=jsApply
+    var obj={
+      name:'Dmast',
+      test(age){
+        console.log(age);
+        var a=Array.from(arguments)
+        console.log(a);
+        
+        console.log('年龄'+age);
+      }
+    }
+    var obj2={
+      name:'asd'
+    }
+    obj.test.jsApply(obj2,[18,11,222])
+  </script>
+</body>
+</html>
