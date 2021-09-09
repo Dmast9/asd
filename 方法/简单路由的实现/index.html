@@ -47,6 +47,7 @@
       //执行当前路由回调函数
       this.routes[this.currentUrl] && this.routes[this.currentUrl]();
     }
+    
     //窗口监视
     Router.prototype.init = function () {
       //窗口监视hash变化事件，从而自动触发该路由规则
