@@ -15,7 +15,10 @@
       let leftValue = this.__proto__
       let rightValue = right.prototype
       while (true) {
+        console.log(111111);
+        
         if (leftValue === null) {
+          // return 无法结束循环，结束一个方法，方法结束，循环跟着结束
           return false
         }
         if (leftValue === rightValue) {

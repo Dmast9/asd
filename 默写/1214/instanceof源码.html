@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    class Person{
+      constructor(name){
+        this.name=name
+      }
+    }
+    var obj={}
+    var Dmast=new Person('Dmast')
+    var Dmast2=new Person('Dmast2')
+    Dmast.__proto__=Dmast2
+    console.log(Dmast instanceof Object);
+    console.log(Dmast);
+    console.log(Person.prototype);
+    
+    function myInstanceof(right){
+      let leftValue=this.__proto__
+      let rightValue=right.prototype
+      while(true){
+        if(!leftValue){
+            return false
+          }
+        if(leftValue==rightValue){
+          return true
+        }
+        leftValue=leftValue.__proto__
+      }
+    }
+    Object.prototype.myInstanceof=myInstanceof
+  </script>
+</body>
+</html>

@@ -29,8 +29,6 @@
         this.val=val
       }
       addSub() {
-       
-        
         this.subs.push(Dep.target)
         console.log('this.subs');
         console.log(this.subs);
@@ -92,10 +90,6 @@
     new Watcher(obj,'name',()=>{
       console.log('我是订阅者1');
     })
-
-
-
-
     new Watcher(arr,'0',()=>{
       console.log('我是订阅者1');
     })

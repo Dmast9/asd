@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <div class="box">防抖节流测试</div>
+  <script>
+    let box = document.querySelector('.box')
+    function cb() {
+      console.log(1111111);
+    }
+    function debounce(cb) {
+      let flag = true, timeout
+      return function () {
+        if (flag) {
+          cb()
+          flag = false
+        }
+        if (timeout) {
+          clearTimeout(timeout)
+        }
+        timeout = setTimeout(() => {
+          flag = true
+        }, 1000);
+      }
+    }
+
+    function throttle(cb) {
+      let flag = true
+      return function () {
+        if (flag) {
+          cb()
+          flag = false
+          setTimeout(() => {
+            flag = true
+          }, 1000);
+        }
+      }
+
+    }
+    // box.onclick = debounce(cb)
+    box.onclick = throttle(cb)
+  </script>
+</body>
+
+</html>

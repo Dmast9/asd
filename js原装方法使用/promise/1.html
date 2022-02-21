@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    // Promise三种状态
+    // pending,fulfilled,rejected
+    // let promise1 = new Promise((resolve, reject) => {
+    //   setTimeout(() => {
+    //     // resolve()
+    //     reject(1111111)
+    //   }, 1000)
+    // })
+    // promise2 = promise1.then(res => {
+    //   // 返回一个普通值
+    //   return '这里返回一个普通值'
+    // },rej=>{
+    //   console.log(333333);
+
+    //   console.log(rej);
+
+    // })
+    // console.log(promise2);
+
+    // promise2.then(res => {
+    //   console.log(res) //1秒后打印出：这里返回一个普通值
+    // })
+
+
+
+
+    // let promise1 = new Promise((resolve, reject) => {
+    //   setTimeout(() => {
+    //     resolve()
+    //   }, 1000)
+    // })
+    // promise2 = promise1.then(res => {
+    //   // 返回一个Promise对象
+    //   return new Promise((resolve, reject) => {
+    //     setTimeout(() => {
+    //       resolve('这里返回一个Promise')
+    //     }, 0)
+    //   })
+    // })
+    // console.log(promise2);
+
+    // promise2.then(res => {
+    //   console.log(res) //3秒后打印出：这里返回一个Promise
+    // })
+
+
+    // let promise1 = new Promise((resolve, reject) => {
+    //   setTimeout(() => {
+    //     // resolve('success')
+    //     // reject('fail')
+    //     // throw new Error('afsd')
+    //     throw new Error('MyPromise must accept a function as a parameter')
+    //   }, 0)
+    // }).catch(res=>{
+    //   console.log(11111);
+      
+    //   console.log(res);
+      
+    // })
+    // console.log(promise1);
+    
+    // // promise2 = promise1.then(res=>res,err=>err).then(res=>res,err=>err)
+    // // promise2.then(res => {
+    // //   console.log(res) // 1秒后打印出：success
+    // // }, err => {
+    // //   console.log(err)
+    // // })
+    let p1=new Promise((resolve,reject)=>{
+      resolve(1)
+    }).then(res=>{
+      console.log(res);
+      
+    }).then(res=>{
+      console.log(res);
+      
+    })
+    console.log(p1);
+    
+  </script>
+</body>
+
+</html>

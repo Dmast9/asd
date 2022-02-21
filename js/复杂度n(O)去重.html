@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    var arr = [3, 5, 6, 8, 5, 11, 9, 44, 22, 3, 44, 9, 6, 5]
+    function myFilter() {
+      var obj = {}
+      arr.forEach(val => {
+        obj[val] = ''
+      })
+      return Object.keys(obj)
+    }
+    var res = myFilter(arr)
+    console.log(res);
+    // function myFilter2(arr) {
+    //   var map = new Map()
+    //   // var arr=[]
+    //   arr.forEach(val => {
+    //     if (map.has(val)) {
+    //       return
+    //     } else {
+    //       map.set(val, 1)
+    //     }
+    //   })
+    //   console.log(map);
+    //   // return Object.keys(map)
+    //   // let a=Object.keys(map)
+    //   // console.log(a);
+    //   let res=[]
+    //   for(var key of map){
+    //     console.log(11111);
+        
+    //     res.push(key)
+    //   }
+    //   return res
+    // }
+    // var res = myFilter2(arr)
+    // console.log(res);
+
+  </script>
+</body>
+
+</html>

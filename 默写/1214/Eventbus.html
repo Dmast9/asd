@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    class EventBus{
+      constructor(){
+        this.event=new Map()
+      }
+      $on(type,cb){
+        if(!this.event.has(type)){
+          this.event.set(type,cb)
+        }
+      }
+      $emit(type,...args){
+        let fn=this.event.get(type)
+        console.log(args);
+        fn&&fn.apply(this,args)
+      }
+    }
+    let emitter=new EventBus()
+    emitter.$on('test',function(){
+      console.log(this);
+    })
+    emitter.$emit('test',123)
+  </script>
+</body>
+</html>

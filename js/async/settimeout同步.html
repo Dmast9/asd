@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    // async function test() {
+    //   await setTimeout(() => {
+    //     console.log(1111111);
+    //   }, 1000);
+    //   console.log(222222);
+    // }
+    // test()
+
+
+    async function async1() {
+      console.log('async1 start')
+      await async2()
+      console.log('async1 end')
+    }
+    async function async2() {
+      console.log('async2')
+    }
+    console.log('script start')
+    setTimeout(() => {
+      console.log('setTimeout')
+    }, 0)
+    async1()
+
+    new Promise((resolve) => {
+      console.log('promise1')
+      resolve()
+    }).then(() => {
+      console.log('promise2')
+    })
+    .then(()=>console.log('promise2222'))
+    .then(()=>console.log('promise2222'))
+    async1()
+   
+    console.log('script end')
+    // script start
+    // promise1
+    // async1 start
+    // async2
+    // script end
+
+
+    // Promise2
+    // async1 end
+
+
+
+    // var test =async function(){
+    //   return 21111
+    // }
+    // console.log(test());
+    
+  </script>
+</body>
+
+</html>

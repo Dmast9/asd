@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    // Promise如果要继续then,需要处于fullfilled状态,主动抛出和出错都可以
+    var pro=new Promise((res,reject)=>{
+      console.log(123);
+      // console.logd(333);
+      // res(111)
+      // res(1111111)
+      return 1111
+      
+    })
+    .then(res=>{
+      console.log('res');
+      console.log(res);
+    })
+    .catch(err=>{
+      console.log('err');
+      console.log(err);
+    }).then(res=>{
+      console.log('res222222222');
+      console.log(res);
+      
+    })
+    console.log('pro');
+    console.log(pro);
+    
+  </script>
+</body>
+</html>

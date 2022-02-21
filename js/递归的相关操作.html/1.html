@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    var routes = [
+      {
+        name: 'asd',
+        roles: 'admin',
+        children: [
+          {
+            name: 'asd2',
+            roles: 'admin'
+          },
+          {
+            name: 'asd3'
+          }
+        ]
+      }
+    ]
+    function filterPermission(routes) {
+      let res = []
+      routes.forEach(route=>{
+        let tem={...route}
+        if(route.roles=='admin'){
+          console.log(3333333);
+          
+          if(route.children){
+            console.log(11111111);
+            
+            tem.children=filterPermission(route.children)
+            console.log(22222222);
+            
+          }
+          res.push(tem)
+        }
+      })
+      return res
+      
+    }
+    var permissionRoutes=filterPermission(routes)
+    console.log('permissionRoutes');
+    console.log(permissionRoutes);
+    
+  </script>
+</body>
+
+</html>

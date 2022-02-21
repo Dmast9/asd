@@ -72,13 +72,16 @@
     function throttle2(fn,delay) {
       var timeout, flag
       var args = [...arguments].slice(2)
+      console.log('this11111');
+      console.log(this);
+      
       return function () {
         if (!flag) {
           flag=true
+          console.log('this222222');
+          console.log(this);
+          
           fn.apply(this,args)
-          // if(timeout){
-          //   clearTimeout(timeout)
-          // }
           timeout = setInterval(()=>{
             flag=false
           }, delay)

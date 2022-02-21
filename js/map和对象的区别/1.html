@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    　function test1(){
+      var a={},b='123',c=123;
+      a[b]="b";
+      a[c]="c";
+      console.log('a :>> ', a);// {123:"c"}
+      console.log('a[b] :>> ', a[b]);
+      // 断言 c 
+      // 正确
+    }
+    // test1()
+    function test2(){
+      var a={};
+      var b = Symbol('123')
+      var c = Symbol('123')
+      a[b]='b'
+      a[c]='c'
+      console.log('a :>> ', a);//{SSymbol(123):'b',Symbol(123):'c'}
+      console.log('a[b] :>> ', a[b]);
+      // 断言 b
+      // 正确
+    }
+    // test2()
+    function test3(){
+      var a={};
+      var b = {key:'123'}
+      var c = {key:'456'}
+      a[b]='b'
+      a[c]='c'
+      console.log('a :>> ', a);// {[Object Object]:"c"}
+      console.log('a[b] :>> ', a[b]);
+      // 断言 c
+      // 正确
+    }
+    // test3()
+
+
+    function test11(){
+      var a=new Map(),b='123',c=123;
+      a.set(b,"b")
+      a.set(c,"c")
+      console.log('a :>> ', a);// 卧槽
+      console.log('a[b] :>> ', a.get(b));
+      // 断言 b
+      // 结果 b
+    }
+    test11()
+    function test22(){
+      var a=new Map();
+      var b = Symbol('123')
+      var c = Symbol('123')
+      a.set(b,"b")
+      a.set(c,"c")
+      console.log('a :>> ', a);// wc
+      console.log('a[b] :>> ', a.get(b));
+      // 断言 b
+      // 正确
+    }
+    test22()
+    function test33(){
+      var a=new Map();
+      var b = {key:'123'}
+      var c = {key:'456'}
+      a.set(b,"b")
+      a.set(c,"c")
+      console.log('a :>> ', a);// wc
+      console.log('a[b] :>> ', a.get(b));
+      // 断言 b
+      // 结果 b
+    }
+    test33()
+
+  </script>
+</body>
+</html>

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    // const p1 = new Promise(function (resolve, reject) {
+    //   setTimeout(() => reject(new Error('fail')), 3000)
+    // })
+
+    const p2 = new Promise(function (resolve, reject) {
+      // setTimeout(() => resolve(p1), 1000)
+      reject(11111111)
+      resolve(44444)
+    })
+
+    p2
+      .then(result => console.log(adsfa))
+      
+      .then(res=>console.log(222222) )
+      .catch(error => console.log(error))
+      .then(res=>console.log(res))
+
+  </script>
+</body>
+
+</html>

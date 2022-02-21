@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    let ago=new Date().getTime()
+    let p1=new Promise((resolve,reject)=>{
+      setTimeout(() => {
+        resolve(1111111)
+      }, 1000);
+    })
+    let p2=new Promise((resolve,reject)=>{
+      setTimeout(() => {
+        // resolve(22222222)
+        reject(2222222)
+      }, 2000);
+    })
+    // Promise.all([p1,p2]).then(res=>{
+    //   let now=new Date().getTime()-ago
+    //   console.log(now);
+      
+    //   console.log(res);
+    //   return 3333333
+      
+    // },err=>{
+    //   console.log('err11111');
+    //   console.log(err);
+      
+    // }).then(res=>{
+    //   console.log('res111');
+    //   console.log(res);
+      
+    // },err=>{
+    //   console.log('errrrrr');
+    //   console.log(err);
+      
+    // })
+    Promise.race([p1,p2]).then(res=>{
+      console.log(res);
+      
+    },err=>{
+      console.log(err);
+      
+    })
+
+  </script>
+</body>
+</html>

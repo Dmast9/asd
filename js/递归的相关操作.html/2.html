@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    var roles = ['editor']
+    var asyncRoutes = [
+      {
+        path: '/permission',
+        // component: Layout,
+        redirect: '/permission/page',
+        alwaysShow: true, // will always show the root menu
+        name: 'Permission',
+        meta: {
+          title: 'Permission',
+          icon: 'lock',
+          roles: ['admin', 'editor'] // you can set roles in root nav
+        },
+        children: [
+          // {
+          //   path: 'page',
+          //   component: () => import('@/views/permission/page'),
+          //   name: 'PagePermission',
+          //   meta: {
+          //     title: 'Page Permission',
+          //     roles: ['admin'] // or you can only set roles in sub nav
+          //   }
+          // },
+          {
+            path: 'directive',
+            component: () => import('@/views/permission/directive'),
+            name: 'DirectivePermission',
+            meta: {
+              title: 'Directive Permission'
+              // if do not set roles, means: this page does not require permission
+            }
+          },
+          {
+            path: 'role',
+            component: () => import('@/views/permission/role'),
+            name: 'RolePermission',
+            meta: {
+              title: 'Role Permission',
+              roles: ['admin']
+            }
+          }
+        ]
+      }
+    ]
+    function hasPermission(roles, route) {
+      if (route.meta && route.meta.roles) {
+        return roles.some(role => route.meta.roles.includes(role))
+      } else {
+        return true
+      }
+    }
+    function filterAsyncRoutes(routes, roles) {
+      const res = []
+
+      routes.forEach(route => {
+        const tmp = { ...route }
+        // console.log('tmp11111');
+        // console.log(tmp);
+
+        if (hasPermission(roles, tmp)) {
+          if (tmp.children) {
+            tmp.children = filterAsyncRoutes(tmp.children, roles)
+          }
+          console.log('tmp');
+          // console.log(tmp);
+          // console.log(JSON.stringify(tmp));
+
+          res.push(tmp)
+        }
+      })
+      console.log('res55555555555');
+
+      console.log(res);
+      console.log(res[0]);
+
+
+      return res
+    }
+    function generateRoutes(roles) {
+      return new Promise(resolve => {
+        let accessedRoutes
+        if (roles.includes('admin')) {
+          accessedRoutes = asyncRoutes || []
+        } else {
+          accessedRoutes = filterAsyncRoutes(asyncRoutes, roles)
+          console.log('accessedRoutes');
+          console.log(accessedRoutes);
+
+        }
+        // commit('SET_ROUTES', accessedRoutes)
+        resolve(accessedRoutes)
+      })
+    }
+    generateRoutes(roles)
+  </script>
+</body>
+
+</html>

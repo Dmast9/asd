@@ -14,6 +14,9 @@
     class EventEmitter {
       constructor() {
         // 存储事件
+        console.log('this.events');
+        console.log(this.events);
+        
         this.events = this.events || new Map()
       }
       // 加上static属于构造函数本身

@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script src="./myPromise.js"></script>
+  <script>
+  // let p1=new MyPromise((resolve,reject)=>{
+  //     // resolve(1111111)
+  //     reject(222222222)
+  //   })
+  //   p1
+  //   .then(res=>{
+  //     console.log(res);
+      
+  //   },
+  //   // err=>{
+  //   //   console.log('err111');
+  //   //   console.log(err);
+      
+  //   // }
+  //   )
+    // .then(res=>{
+    //   console.log(res);
+      
+    // })
+    // .catch(err=>{
+    //   console.log('err2222');
+    //   console.log(err);
+      
+    // })
+    // let p=new MyPromise(res=>{res(1111111)}).then(1111).then(res=>{
+    //   console.log('res');
+    //   console.log(res);
+      
+    // })
+    // let p=new MyPromise((res,rej)=>{rej(1111111)}).then(1111,222).then(res=>{
+    //   console.log('res');
+    //   console.log(res);
+      
+    // },err=>{
+    //   console.log('err');
+    //   console.log(err);
+      
+    // })
+
+    let ago=new Date().getTime()
+    let p1=new MyPromise((resolve,reject)=>{
+      setTimeout(() => {
+        resolve(1111111)
+      }, 1000);
+    })
+    let p2=new MyPromise((resolve,reject)=>{
+      setTimeout(() => {
+        // resolve(22222222)
+        reject(2222222)
+      }, 2000);
+    })
+    // MyPromise.all([p1,p2]).then(res=>{
+    //   let now=new Date().getTime()-ago
+    //   console.log(now);
+    //   console.log(res);
+    //   return 3333333
+      
+    // }
+    // // ,err=>{
+    // //   console.log('err11111');
+    // //   console.log(err);
+      
+    // // }
+    // ).then(res=>{
+    //   console.log('res111');
+    //   console.log(res);
+      
+    // },err=>{
+    //   console.log('errrrrr');
+    //   console.log(err);
+      
+    // })
+    MyPromise.race([p1,p2]).then(res=>{
+      console.log('res');
+      console.log(res);
+      
+    },err=>{
+      console.log('err');
+      console.log(err);
+      
+    })
+    
+  </script>
+</body>
+</html>

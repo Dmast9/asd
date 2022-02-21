@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>防止margin重叠</title>
+</head>
+<style>
+  /* * {
+    margin: 0;
+    padding: 0;
+  } */
+
+  p {
+    color: #f55;
+    background: yellow;
+    width: 200px;
+    line-height: 100px;
+    text-align: center;
+    margin: 30px;
+  }
+
+  .box {
+    overflow: hidden;
+  }
+  .box1,.box2{
+    width: 100px;
+    height: 100px;
+    display: inline-block;
+    margin: 100px;
+    background-color: aqua;
+  }
+  span{
+    margin: 100px;
+  }
+</style>
+
+<body>
+  <div>margin塌陷主要指高度塌陷</div>
+  <div>触发bfc</div>
+  <ul>
+    <li>body根元素</li>
+    <li>浮动元素：float 除 none 以外的值</li>
+    <li>绝对定位元素：position (absolute、fixed)</li>
+    <li>display 为 inline-block、table-cells、flex</li>
+    <li>overflow 除了 visible 以外的值 (hidden、auto、scroll)
+    </li>
+  </ul>
+  <p>看看我的 margin是多少</p>
+  <div class="box">
+    <p>看看我的 margin是多少</p>
+  </div>
+  <div>
+    <div class="box1">1111</div>
+    <div class="box2">222222</div>
+  </div>
+  <div>
+    <span>123</span>
+    <span>456</span>
+  </div>
+</body>
+
+</html>

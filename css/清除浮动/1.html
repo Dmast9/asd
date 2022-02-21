@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+  .box1{
+    width: 100px;
+    height: 100px;
+    background-color: aqua;
+    float: left;
+  }
+  .box2{
+    width: 100px;
+    height: 100px;
+    background-color: aqua;
+    float: right;
+  }
+  .box3{
+    /* clear: both; */
+  }
+  .box4{
+    width: 200px;
+    height: 50px;
+    background-color: red;
+  }
+  .clearfix::after{
+    content: '';
+    /* height: 0; */
+    display: block;
+    clear: both;
+  }
+  </style>
+</head>
+<body>
+  <div class="box clearfix">
+    <div class="box1">左边</div>
+    <div class="box2">右边</div>
+    <div class="box3"></div>
+    <div class="box4">clearboth以后</div>
+  </div>
+  <div>555555</div>
+</body>
+</html>
