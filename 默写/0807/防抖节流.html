@@ -18,83 +18,101 @@
 <body>
   <div class="box">测试防抖节流</div>
   <script>
-    function callback() {
-      console.log(111111);
-      console.log([...arguments]);
-    }
-    //防抖延迟执行
-    function debounce1(fn, delay) {
-      var timeout
-      var args = [...arguments].slice(2)
-      return function () {
-        if (timeout) {
-          clearTimeout(timeout)
-        }
-        timeout = setTimeout(fn.bind(this, ...args), delay)
-      }
-    }
-    // 防抖立即执行
-    function debounce2(fn, delay) {
-      var timeout, flag
-      var args = [...arguments].slice(2)
-      return function () {
-        if (!flag) {
-          fn.apply(this, args)
-          flag = true
-        }
-        if (timeout) {
-          clearTimeout(timeout)
-        }
-        timeout = setTimeout(() => {
-          flag = false
-        }, delay);
-      }
-    }
+    // function callback() {
+    //   console.log(111111);
+    //   console.log([...arguments]);
+    // }
+    // //防抖延迟执行
+    // function debounce1(fn, delay) {
+    //   var timeout
+    //   var args = [...arguments].slice(2)
+    //   return function () {
+    //     if (timeout) {
+    //       clearTimeout(timeout)
+    //     }
+    //     timeout = setTimeout(fn.bind(this, ...args), delay)
+    //   }
+    // }
+    // // 防抖立即执行
+    // function debounce2(fn, delay) {
+    //   var timeout, flag
+    //   var args = [...arguments].slice(2)
+    //   return function () {
+    //     if (!flag) {
+    //       fn.apply(this, args)
+    //       flag = true
+    //     }
+    //     if (timeout) {
+    //       clearTimeout(timeout)
+    //     }
+    //     timeout = setTimeout(() => {
+    //       flag = false
+    //     }, delay);
+    //   }
+    // }
 
-    //节流延迟执行
-    function throttle1(fn,delay) {
-      var timeout, flag
-      var args = [...arguments].slice(2)
-      return function () {
-        if (!flag) {
-          flag=true
-          if(timeout){
-            clearTimeout(timeout)
-          }
-          timeout = setInterval(()=>{
-            fn.apply(this,args)
-            flag=false
-          }, delay)
-        }
-      }
-    }
-    // 节流立即执行
-    function throttle2(fn,delay) {
-      var timeout, flag
-      var args = [...arguments].slice(2)
-      console.log('this11111');
-      console.log(this);
+    // //节流延迟执行
+    // function throttle1(fn,delay) {
+    //   var timeout, flag
+    //   var args = [...arguments].slice(2)
+    //   return function () {
+    //     if (!flag) {
+    //       flag=true
+    //       if(timeout){
+    //         clearTimeout(timeout)
+    //       }
+    //       timeout = setInterval(()=>{
+    //         fn.apply(this,args)
+    //         flag=false
+    //       }, delay)
+    //     }
+    //   }
+    // }
+    // // 节流立即执行
+    // function throttle2(fn,delay) {
+    //   var timeout, flag
+    //   var args = [...arguments].slice(2)
+    //   console.log('this11111');
+    //   console.log(this);
       
-      return function () {
-        if (!flag) {
-          flag=true
-          console.log('this222222');
-          console.log(this);
+    //   return function () {
+    //     if (!flag) {
+    //       flag=true
+    //       console.log('this222222');
+    //       console.log(this);
           
-          fn.apply(this,args)
-          timeout = setInterval(()=>{
-            flag=false
-          }, delay)
-        }
-      }
-    }
-    var box = document.querySelector('.box')
-    // box.onclick=debounce1(callback,1000,'Dmast',18)
-    // box.onclick = debounce2(callback, 1000, 'Dmast', 18)
-    // box.onclick = throttle1(callback, 1000, 'Dmast', 18)
-    box.onclick = throttle2(callback, 1000, 'Dmast', 18)
+    //       fn.apply(this,args)
+    //       timeout = setInterval(()=>{
+    //         flag=false
+    //       }, delay)
+    //     }
+    //   }
+    // }
+    // var box = document.querySelector('.box')
+    // // box.onclick=debounce1(callback,1000,'Dmast',18)
+    // // box.onclick = debounce2(callback, 1000, 'Dmast', 18)
+    // // box.onclick = throttle1(callback, 1000, 'Dmast', 18)
+    // box.onclick = throttle2(callback, 1000, 'Dmast', 18)
+let timeout=''
+console.log(timeout);
 
+timeout=setTimeout(()=>{
+  console.log(111111);
+  clearTimeout(timeout)
+  
+},1000)
+console.log(timeout);
 
+setTimeout(() => {
+  clearTimeout(timeout)
+  console.log(timeout);
+  
+}, 2000);
+setTimeout(() => {
+  // clearTimeout(timeout)
+  console.log(timeout);
+  
+}, 3000);
   </script>
 </body>
 
